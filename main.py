@@ -235,8 +235,8 @@ def rasterize_triangle(framebuffer, zbuffer, texture,
                        width, height, tex_h, tex_w):
     
     # Back-face culling
-    #if not is_front_facing(x0, y0, x1, y1, x2, y2):
-     #   return
+    if not is_front_facing(x0, y0, x1, y1, x2, y2):
+        return
     
     # Bounding box
     min_x = max(int(min(x0, x1, x2)), 0)
@@ -347,8 +347,8 @@ def render(cam, mesh, texture, width, height):
             continue
         
         #Hemisphere Culling
-        #if front_val[a] < -0.1 and front_val[b] < -0.1 and front_val[c] < -0.1:
-         #   continue
+        if front_val[a] < -0.1 and front_val[b] < -0.1 and front_val[c] < -0.1:
+            continue
         
         # Clip Z values to prevent division issues
         Za = max(Za, near)
@@ -427,7 +427,7 @@ def main():
     mesh.vertices, mesh.uv, mesh.triangles = fix_uv_seams(mesh.vertices, mesh.uv, mesh.triangles)
 
     # camera setup
-    cam = camera(f=300.0, theta=0.0, phi=0.4, d=1.5, min_zoom=0, max_zoom=3, phi_limit=np.radians(89.0))
+    cam = camera(f=300.0, theta=0.0, phi=0.4, d=1.5, min_zoom=1.1, max_zoom=3, phi_limit=np.radians(89.0))
 
     running = True
     last_mouse_pos = None
