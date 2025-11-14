@@ -28,10 +28,10 @@ class camera:
         self.d = np.clip(self.d, self.min_zoom, self.max_zoom)
 
         #This adjusts focal length, just comment it out if you dont like. *= is a real zoom, /= is a dolly zoom
-        """if self.d > self.min_zoom and self.d < self.max_zoom:
+        if self.d > self.min_zoom and self.d < self.max_zoom:
             f_speed = 0.15
             self.K[0, 0] /= (1 + f_speed * delta_d)
-            self.K[1, 1] /= (1 + f_speed * delta_d)"""
+            self.K[1, 1] /= (1 + f_speed * delta_d)
 
     #Converts polar coords to xyz for rendering
     def toXYZ(self):
@@ -521,3 +521,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
